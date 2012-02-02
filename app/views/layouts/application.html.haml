@@ -1,0 +1,48 @@
+!!! 5
+%html
+%head
+	%meta(charset="utf-8")
+	%title discovery!
+	-# = stylesheet_link_tag    "application"
+	
+	
+	-# Whats nescessary to serve the less css stylesheets
+	%link(rel="stylesheet/less" href="/stylesheets/less/bootstrap.less")
+	%link(rel="stylesheet/less" href="/stylesheets/less/foundation.less")
+	%link(rel="stylesheet/less" href="/stylesheets/less/discovery.less")
+	%script(src="http://lesscss.googlecode.com/files/less-1.2.1.min.js" type="text/javascript")
+	-# = javascript_include_tag "application"
+	
+	= csrf_meta_tags
+
+%body
+
+	#header
+	
+		.container
+			.row
+				.twelve.columns
+				
+				
+					#logo
+						.name 	discovery!
+						.slogan 	The finest repos on github easily accessible.
+					
+					#navigation
+					
+						-# Maybe there is an easier way to build a navigation
+						- if controller.controller_name == "labels"
+							%a.navitem.active(href="/") Labels
+						- else
+							%a.navitem(href="/")	Labels
+						
+						- if controller.controller_name == "repos"
+							%a.navitem.active(href="/repos") Repos
+						- else
+							%a.navitem(href="/repos")	Repos
+						
+		
+
+	= yield
+
+	%script document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')

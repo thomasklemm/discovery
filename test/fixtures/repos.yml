@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ident: MyString
+  name: MyString
+  owner: MyString
+  description: MyText
+  watchers: 1
+  forks: 1
+  html_url: MyString
+  homepage: MyString
+  last_updated: 2012-01-31 19:40:44
+  community_text: MyText
+
+two:
+  ident: MyString
+  name: MyString
+  owner: MyString
+  description: MyText
+  watchers: 1
+  forks: 1
+  html_url: MyString
+  homepage: MyString
+  last_updated: 2012-01-31 19:40:44
+  community_text: MyText

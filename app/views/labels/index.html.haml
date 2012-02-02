@@ -1,0 +1,25 @@
+%h1 Listing labels
+
+%table
+  %tr
+    %th Name
+    %th Repo count
+    %th Watcher count
+    %th Description
+    %th
+    %th
+    %th
+
+  - @labels.each do |label|
+    %tr
+      %td= label.name
+      %td= label.repo_count
+      %td= label.watcher_count
+      %td= label.description
+      %td= link_to 'Show', label
+      %td= link_to 'Edit', edit_label_path(label)
+      %td= link_to 'Destroy', label, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Label', new_label_path

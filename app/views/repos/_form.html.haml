@@ -1,0 +1,40 @@
+= form_for @repo do |f|
+  -if @repo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@repo.errors.count, "error")} prohibited this repo from being saved:"
+      %ul
+        - @repo.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :ident
+    = f.text_field :ident
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :owner
+    = f.text_field :owner
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :watchers
+    = f.number_field :watchers
+  .field
+    = f.label :forks
+    = f.number_field :forks
+  .field
+    = f.label :html_url
+    = f.text_field :html_url
+  .field
+    = f.label :homepage
+    = f.text_field :homepage
+  .field
+    = f.label :last_updated
+    = f.datetime_select :last_updated
+  .field
+    = f.label :community_text
+    = f.text_area :community_text
+  .actions
+    = f.submit 'Save'

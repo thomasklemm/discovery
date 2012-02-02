@@ -1,0 +1,37 @@
+%h1 Listing repos
+
+%table
+  %tr
+    %th Ident
+    %th Name
+    %th Owner
+    %th Description
+    %th Watchers
+    %th Forks
+    %th Html url
+    %th Homepage
+    %th Last updated
+    %th Community text
+    %th
+    %th
+    %th
+
+  - @repos.each do |repo|
+    %tr
+      %td= repo.ident
+      %td= repo.name
+      %td= repo.owner
+      %td= repo.description
+      %td= repo.watchers
+      %td= repo.forks
+      %td= repo.html_url
+      %td= repo.homepage
+      %td= repo.last_updated
+      %td= repo.community_text
+      %td= link_to 'Show', repo
+      %td= link_to 'Edit', edit_repo_path(repo)
+      %td= link_to 'Destroy', repo, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Repo', new_repo_path

@@ -1,0 +1,575 @@
+/*
+	Bootstrap v3.0.0
+	----------------
+	
+	Variables and mixins to bootstrap any new web development project.
+	
+	Original:
+		- Mark Otto (http://markdotto.com/bootstrap)
+	
+	Fork and addons by:
+		- Vaclav Vancura / SAY Media (vvancura@saymedia.com)
+		- Alex Schleifer / SAY Media (alexoid@saymedia.com)
+*/
+
+
+
+/* ============= */
+/* = Variables = */
+/* ============= */
+
+// note: keep site-specific properties out of the bootstrap.less file!
+
+// links
+// -----
+
+@linkColor:         #8b59c2;
+@linkColorHover:    darken(@linkColor, 10);
+
+// grays
+// -----
+
+@white:             white;
+@grayLighter:       #ccc;
+@grayLight:         #777;
+@gray:              #555;
+@grayDark:          #333;
+@black:             black;
+
+// transparencies
+// --------------
+
+@transparent:       rgba(0,0,0,0);
+@black25:           rgba(0,0,0,0.25);
+@black50:           rgba(0,0,0,0.5);
+@black75:           rgba(0,0,0,0.75);
+@white25:           rgba(255,255,255,0.25);
+@white50:           rgba(255,255,255,0.5);
+@white75:           rgba(255,255,255,0.75);
+
+// accent colors
+// -------------
+
+@blue:              #08b5fb;
+@green:             #46a546;
+@red:               #9d261d;
+@yellow:            #ffc40d;
+@orange:            #f89406;
+@pink:              #c3325f;
+@purple:            #7a43b6;
+
+// baseline grid
+// -------------
+
+@baseline:          1em;
+@globalLineHeight:  1.618em;
+@hairline:          0.075em;
+
+
+
+/* ========== */
+/* = Mixins = */
+/* ========== */
+
+// clearfix for clearing floats like a boss
+// ----------------------------------------
+
+.clearfix {
+	zoom: 1;
+
+	&:after {
+		display: block;
+		visibility: hidden;
+		height: 0;
+		clear: both;
+		content: ".";
+	}
+}
+
+// center-align a block level element
+// ----------------------------------
+
+.center-block {
+	display: block;
+	margin: 0 auto;
+}
+
+// sizing shortcuts
+// ----------------
+
+.size(@height: 1em, @width: 1em) {
+	height: @height;
+	width: @width;
+}
+
+.square(@size: 1em) {
+	.size(@size, @size);
+}
+
+// input placeholder text
+// ----------------------
+
+.placeholder(@color: @grayLight) {
+	:-webkit-placeholder,
+	:-moz-placeholder,
+	:-o-placeholder,
+	:-ms-placeholder {
+		color: @color;
+	}
+
+	::-webkit-input-placeholder,
+	::-moz-input-placeholder,
+	::-o-input-placeholder,
+	::-ms-input-placeholder,
+	::-khtml-input-placeholder,
+	::input-placeholder {
+		color: @color;
+	}
+}
+
+// font stacks
+// -----------
+
+// note: keep site-specific properties out of the bootstrap.less file!
+
+#font {
+	.shorthand(@weight: normal, @size: 1em, @lineHeight: @globalLineHeight) {
+		font-size: @size;
+		font-weight: @weight;
+		line-height: @lineHeight;
+	}
+
+	.sans-serif(@weight: normal, @size: 1em, @lineHeight: @globalLineHeight) {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: @size;
+		font-weight: @weight;
+		line-height: @lineHeight;
+	}
+
+	.serif(@weight: normal, @size: 1em, @lineHeight: @globalLineHeight) {
+		font-family: "Georgia", Times New Roman, Times, sans-serif;
+		font-size: @size;
+		font-weight: @weight;
+		line-height: @lineHeight;
+	}
+
+	.monospace(@weight: normal, @size: 1em, @lineHeight: @globalLineHeight) {
+		font-family: "Monaco", Courier New, monospace;
+		font-size: @size;
+		font-weight: @weight;
+		line-height: @lineHeight;
+	}
+
+}
+
+// border radius
+// -------------
+
+.border-radius(@radius: 1em) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-o-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-khtml-border-radius: @radius;
+	border-radius: @radius;
+	
+	.bleedfix;
+}
+
+.border-radiuses(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+	-webkit-border-top-right-radius: @topright;
+	-webkit-border-bottom-right-radius: @bottomright;
+	-webkit-border-bottom-left-radius: @bottomleft;
+	-webkit-border-top-left-radius: @topleft;
+	
+	-moz-border-radius-topright: @topright;
+	-moz-border-radius-bottomright: @bottomright;
+	-moz-border-radius-bottomleft: @bottomleft;
+	-moz-border-radius-topleft: @topleft;
+	
+	-o-border-radius-topright: @topright;
+	-o-border-radius-bottomright: @bottomright;
+	-o-border-radius-bottomleft: @bottomleft;
+	-o-border-radius-topleft: @topleft;
+	
+	-ms-border-radius-topright: @topright;
+	-ms-border-radius-bottomright: @bottomright;
+	-ms-border-radius-bottomleft: @bottomleft;
+	-ms-border-radius-topleft: @topleft;
+	
+	-khtml-border-radius-topright: @topright;
+	-khtml-border-radius-bottomright: @bottomright;
+	-khtml-border-radius-bottomleft: @bottomleft;
+	-khtml-border-radius-topleft: @topleft;
+	
+	border-top-right-radius: @topright;
+	border-bottom-right-radius: @bottomright;
+	border-bottom-left-radius: @bottomleft;
+	border-top-left-radius: @topleft;
+	
+	.bleedfix;
+}
+
+// bleeding box fix
+// ----------------
+// http://tumble.sneak.co.nz/post/928998513/fixing-the-background-bleed
+// Has to be used after all other background shortcodes
+
+.bleedfix {
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box; 
+}
+
+// don't allow to select text
+// --------------------------
+
+.no-user-select {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+.force-user-select {
+	-webkit-user-select: text !important;
+	-moz-user-select: text !important;
+	-o-user-select: text !important;
+	-ms-user-select: text !important;
+	-khtml-user-select: text !important;
+	user-select: text !important;
+}
+
+// drop shadows
+// ------------
+
+.box-shadow(@shadow: 0 0.33em 0.33em @black25) {
+	-webkit-box-shadow: @shadow;
+	-moz-box-shadow: @shadow;
+	-o-box-shadow: @shadow;
+	-ms-box-shadow: @shadow;
+	-khtml-box-shadow: @shadow;
+	box-shadow: @shadow;
+}
+
+.drop-shadow(@x-axis: 0, @y-axis: 0.33em, @blur: 0.33em, @alpha: 0.25) {
+	-webkit-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	-moz-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	-o-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	-ms-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	-khtml-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+	box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+}
+
+.inner-shadow(@horizontal:0, @vertical:1px, @blur:2px, @alpha: 0.4) {
+	-webkit-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+	-moz-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+	-o-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+	-ms-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+	-kthml-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+	box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+}
+
+// borders
+// -------
+
+.bordered(@top-color: #eee, @right-color: #eee, @bottom-color: #eee, @left-color: #eee) {
+	border-top: solid 1px @top-color;
+	border-left: solid 1px @left-color;
+	border-right: solid 1px @right-color;
+	border-bottom: solid 1px @bottom-color;
+}
+
+.debug {
+	border: 1px red dotted;
+}
+
+.debug-f {
+	background: rgba(255,0,0,0.5) !important;
+}
+
+// transforms
+// ----------
+
+.rotation(@deg: 5deg) {
+	-webkit-transform: rotate(@deg);
+	-moz-transform: rotate(@deg);
+	-o-transform: rotate(@deg);
+	-ms-transform: rotate(@deg);
+	-khtml-transform: rotate(@deg);
+	transform: rotate(@deg);
+}
+
+.scale(@ratio: 1.5){
+	-webkit-transform: scale(@ratio);
+	-moz-transform: scale(@ratio);
+	-o-transform: scale(@ratio);
+	-ms-transform: scale(@ratio);
+	-khtml-transform: scale(@ratio);
+	transform: scale(@ratio);
+}
+
+// transitions
+// -----------
+
+.transition(@transition: all ease-in-out 0.2s) {
+	-webkit-transition: @transition;
+	-moz-transition: @transition;
+	-o-transition: @transition;
+	-ms-transition: @transition;
+	-khtml-transition: @transition;
+	transition: @transition;
+}
+
+.appear-transition(@transition: opacity 0.9s, @delay: 0.5s) {
+	-webkit-transition: @transition;
+	-moz-transition: @transition;
+	-o-transition: @transition;
+	-ms-transition: @transition;
+	-khtml-transition: @transition;
+	transition: @transition;
+
+	-webkit-transition-delay: @delay;
+	-moz-transition-delay: @delay;
+	-o-transition-delay: @delay;
+	-ms-transition-delay: @delay;
+	-khtml-transition-delay: @delay;
+	transition-delay: @delay;
+}
+
+.transition-duration(@duration: 0.2s) {
+	-webkit-transition-duration: @duration;
+	-moz-transition-duration: @duration;
+	-o-transition-duration: @duration;
+	-ms-transition-duration: @duration;
+	-khtml-transition-duration: @duration;
+	transition-duration: @duration;
+}
+
+.transition-delay(@delay: 0.5s) {
+	-webkit-transition-delay: @delay;
+	-moz-transition-delay: @delay;
+	-o-transition-delay: @delay;
+	-ms-transition-delay: @delay;
+	-khtml-transition-delay: @delay;
+	transition-delay: @delay;
+}
+
+// translate
+// ---------
+
+.translate(@x:0, @y:0) {
+	-webkit-transform: translate(@x, @y);
+	-moz-transform: translate(@x, @y);
+	-o-transform: translate(@x, @y);
+	-ms-transform: translate(@x, @y);
+	-khtml-transform: translate(@x, @y);
+	transform: translate(@x, @y);
+}
+
+// css3 content columns
+// --------------------
+
+.content-columns(@columnCount, @columnGap: 1em) {
+	-webkit-column-count: @columnCount;
+	-moz-column-count: @columnCount;
+	-o-column-count: @columnCount;
+	-ms-column-count: @columnCount;
+	-khtml-column-count: @columnCount;
+	column-count: @columnCount;
+
+	-webkit-column-gap: @columnGap;
+	-moz-column-gap: @columnGap;
+	-o-column-gap: @columnGap;
+	-ms-column-gap: @columnGap;
+	-khtml-column-gap: @columnGap;
+	column-gap: @columnGap;
+}
+
+// buttons
+// -------
+
+.button(@color: #f5f5f5, @textColor: #333, @textShadow: 0 @hairline @hairline @white75, @fontSize: 1em, @padding: 1em 2em, @borderRadius: 1em) {
+	display: inline-block;
+	padding: @padding;
+	text-shadow: @textShadow;
+	color: @textColor;
+	font-size: @fontSize;
+	line-height: @globalLineHeight;
+
+	#gradient > .vertical(@color,darken(saturate(@color,10),10));
+
+	@shadow: inset 0 @hairline 0 @white25, inset 0 -@hairline 0 @black25, 0 @hairline 0.2em @black25;
+
+	.border-radius(@borderRadius);
+	.box-shadow(@shadow);
+
+	&:hover {
+		background-position: 0 -2em;
+		color: @textColor;
+		text-decoration: none;
+	}
+}
+
+// add an alphatransparency value to any background or border color
+// ----------------------------------------------------------------
+// (via Elyse Holladay)
+
+#translucent {
+	.background(@color: @white, @alpha: 1) {
+		background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+	}
+
+	.border(@color: @white, @alpha: 1) {
+		border-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+		background-clip: padding-box;
+	}
+}
+
+// gradients
+// ---------
+
+#gradient {
+	.horizontal (@startColor: #555, @endColor: #333) {
+		background-color: @endColor;
+		background-repeat: repeat-x;
+		background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, @startColor), color-stop(100%, @endColor)); /* Safari 4+, Chrome 2+ */
+		background-image: -webkit-linear-gradient(left, @startColor, @endColor); /* Safari 5.1+, Chrome 10+ */
+		background-image: -moz-linear-gradient(left, @startColor, @endColor); /* FF 3.6+ */
+		background-image: -o-linear-gradient(left, @startColor, @endColor); /* Opera 11.10 */
+		background-image: -ms-linear-gradient(left, @startColor, @endColor); /* IE10 */
+		background-image: -khtml-gradient(linear, left top, right top, from(@startColor), to(@endColor)); /* Konqueror */
+		filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",@startColor,@endColor)); /* IE6 & IE7 */
+		-ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",@startColor,@endColor); /* IE8+ */
+		background-image: linear-gradient(left, @startColor, @endColor); /* the standard */
+	}
+
+	.vertical (@startColor: #555, @endColor: #333) {
+		background-color: @endColor;
+		background-repeat: repeat-x;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @startColor), color-stop(100%, @endColor)); /* Safari 4+, Chrome 2+ */
+		background-image: -webkit-linear-gradient(@startColor, @endColor); /* Safari 5.1+, Chrome 10+ */
+		background-image: -moz-linear-gradient(@startColor, @endColor); /* FF 3.6+ */
+		background-image: -o-linear-gradient(@startColor, @endColor); /* Opera 11.10 */
+		background-image: -ms-linear-gradient(@startColor, @endColor); /* IE10 */
+		background-image: -khtml-gradient(linear, left top, left bottom, from(@startColor), to(@endColor)); /* Konqueror */
+		filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor)); /* IE6 & IE7 */
+		-ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor); /* IE8+ */
+		background-image: linear-gradient(@startColor, @endColor); /* the standard */
+	}
+
+	.directional (@startColor: #555, @endColor: #333, @deg: 45deg) {
+		background-color: @endColor;
+		background-repeat: repeat-x;
+		background-image: -webkit-linear-gradient(@deg, @startColor, @endColor); /* Safari 5.1+, Chrome 10+ */
+		background-image: -moz-linear-gradient(@deg, @startColor, @endColor); /* FF 3.6+ */
+		background-image: -o-linear-gradient(@deg, @startColor, @endColor); /* Opera 11.10 */
+		background-image: -ms-linear-gradient(@deg, @startColor, @endColor); /* IE10 */
+		background-image: linear-gradient(@deg, @startColor, @endColor); /* the standard */
+	}
+
+	.vertical-three-colors(@startColor: #00b3ee, @midColor: #7a43b6, @colorStop: 0.5, @endColor: #c3325f) {
+		background-color: @endColor;
+		background-repeat: no-repeat;
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), color-stop(@colorStop, @midColor), to(@endColor));
+		background-image: -webkit-linear-gradient(@startColor, color-stop(@colorStop, @midColor), @endColor);
+		background-image: -moz-linear-gradient(@startColor, color-stop(@midColor, @colorStop), @endColor);
+	}
+}
+
+// opacity
+// -------
+
+.opacity(@opacity: 100) {
+	filter: e(%("alpha(opacity=%d)", @opacity));
+	-khtml-opacity: @opacity / 100;
+	-moz-opacity: @opacity / 100;
+	opacity: @opacity / 100;
+}
+
+// css3 flexible box module
+// ------------------------
+
+#flexbox {
+	// #flexbox > .display-box; must be used along with other flexbox mixins
+	.display-box {
+		display: -webkit-box;
+		display: -moz-box;
+		display: -o-box;
+		display: -ms-box;
+		display: -khtml-box;
+		display: box;
+	}
+
+	// box align [ start | end | center | baseline | stretch ]
+	.box-align(@alignment: stretch) {
+		-webkit-box-align: @alignment;
+		-moz-box-align: @alignment;
+		-o-box-align: @alignment;
+		-ms-box-align: @alignment;
+		-khtml-box-align: @alignment;
+		box-align: @alignment;
+	}
+
+	// box direction [ normal | reverse | inherit ]
+	.box-direction(@direction: normal) {
+		-webkit-box-direction: @direction;
+		-moz-box-direction: @direction;
+		-o-box-direction: @direction;
+		-ms-box-direction: @direction;
+		-khtml-box-direction: @direction;
+		box-direction: @direction;
+	}
+
+	// box flex [ integer ]
+	.box-flex(@flex: 0) {
+		-webkit-box-flex: @flex;
+		-moz-box-flex: @flex;
+		-o-box-flex: @flex;
+		-ms-box-flex: @flex;
+		-khtml-box-flex: @flex;
+		box-flex: @flex;
+	}
+
+	// box flex group [ integer ]
+	.box-flex-group(@group: 1) {
+		-webkit-box-flex-group: @group;
+		-moz-box-flex-group: @group;
+		-o-box-flex-group: @group;
+		-ms-box-flex-group: @group;
+		-khtml-box-flex-group: @group;
+		box-flex-group: @group;
+	}
+
+	// box orientation [ horizontal | vertical | inline-axis | block-axis | inherit ]
+	.box-orient(@orientation: horizontal) {
+		-webkit-box-orient: @orientation;
+		-moz-box-orient: @orientation;
+		-o-box-orient: @orientation;
+		-ms-box-orient: @orientation;
+		-khtml-box-orient: @orientation;
+		box-orient: @orientation;
+	}
+
+	// box ordinal group [ integer ]
+	.box-ordinal-group(@group: 1) {
+		-webkit-box-ordinal-group:@group;
+		-moz-box-ordinal-group: @group;
+		-o-box-ordinal-group: @group;
+		-ms-box-ordinal-group: @group;
+		-khtml-box-ordinal-group: @group;
+		box-flex-ordinal-group: @group;
+	}
+
+	// box pack  [ start | end | center | justify ]
+	.box-pack(@pack: start) {
+		-webkit-box-pack: @pack;
+		-moz-box-pack: @pack;
+		-o-box-pack: @pack;
+		-ms-box-pack: @pack;
+		-khtml-box-pack: @pack;
+		box-pack: @pack;
+	}
+}

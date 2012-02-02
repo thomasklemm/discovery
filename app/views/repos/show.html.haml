@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Ident:
+  = @repo.ident
+%p
+  %b Name:
+  = @repo.name
+%p
+  %b Owner:
+  = @repo.owner
+%p
+  %b Description:
+  = @repo.description
+%p
+  %b Watchers:
+  = @repo.watchers
+%p
+  %b Forks:
+  = @repo.forks
+%p
+  %b Html url:
+  = @repo.html_url
+%p
+  %b Homepage:
+  = @repo.homepage
+%p
+  %b Last updated:
+  = @repo.last_updated
+%p
+  %b Community text:
+  = @repo.community_text
+
+= link_to 'Edit', edit_repo_path(@repo)
+\|
+= link_to 'Back', repos_path

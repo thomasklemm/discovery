@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @label.name
+%p
+  %b Repo count:
+  = @label.repo_count
+%p
+  %b Watcher count:
+  = @label.watcher_count
+%p
+  %b Description:
+  = @label.description
+
+= link_to 'Edit', edit_label_path(@label)
+\|
+= link_to 'Back', labels_path
