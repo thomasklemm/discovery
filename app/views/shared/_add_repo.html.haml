@@ -1,0 +1,11 @@
+#add_repo
+	
+	.h6 Add a new repo
+	
+	%form.nice(accept-charset="UTF-8" action="/repos" method="post")
+		%input.input_text(type="text" size="30" name="repo[owner]" placeholder="Owner's Github Name" autocomplete="off")
+		\ /
+		%input.input_text(type="text" size="30" name="repo[name]" placeholder="Repo Name" autocomplete="off")
+		
+		%input(type="submit" value="Add repo")
+	

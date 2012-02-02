@@ -1,37 +1,18 @@
-%h1 Listing repos
+.h4 Repos
 
-%table
-  %tr
-    %th Ident
-    %th Name
-    %th Owner
-    %th Description
-    %th Watchers
-    %th Forks
-    %th Html url
-    %th Homepage
-    %th Last updated
-    %th Community text
-    %th
-    %th
-    %th
+- @repos.each do |repo|
+	.repo
+		.ident
+			.owner= 			repo.owner
+			.name= 			repo.name
+			.description= 	repo.description
+			.community_text= repo.community_text
+			.watchers= 		repo.watchers
+			.forks= 			repo.forks
+			%a.html_url(href="#{ repo.html_url }")
+			%a.homepage(href="#{ repo.homepage }")
+			.acitivity
+				.last_updated= 	repo.last_updated
+				.activity_wheel
 
-  - @repos.each do |repo|
-    %tr
-      %td= repo.ident
-      %td= repo.name
-      %td= repo.owner
-      %td= repo.description
-      %td= repo.watchers
-      %td= repo.forks
-      %td= repo.html_url
-      %td= repo.homepage
-      %td= repo.last_updated
-      %td= repo.community_text
-      %td= link_to 'Show', repo
-      %td= link_to 'Edit', edit_repo_path(repo)
-      %td= link_to 'Destroy', repo, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Repo', new_repo_path
+= render(partial: "shared/add_repo")

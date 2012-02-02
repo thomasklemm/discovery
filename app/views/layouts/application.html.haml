@@ -4,15 +4,14 @@
 	%meta(charset="utf-8")
 	%title discovery!
 	-# = stylesheet_link_tag    "application"
-	
+	= javascript_include_tag "application"
 	
 	-# Whats nescessary to serve the less css stylesheets
 	%link(rel="stylesheet/less" href="/stylesheets/less/bootstrap.less")
 	%link(rel="stylesheet/less" href="/stylesheets/less/foundation.less")
 	%link(rel="stylesheet/less" href="/stylesheets/less/discovery.less")
 	%script(src="http://lesscss.googlecode.com/files/less-1.2.1.min.js" type="text/javascript")
-	-# = javascript_include_tag "application"
-	
+
 	= csrf_meta_tags
 
 %body
@@ -40,6 +39,9 @@
 							%a.navitem.active(href="/repos") Repos
 						- else
 							%a.navitem(href="/repos")	Repos
+							
+	- if notice
+		= notice
 						
 		
 

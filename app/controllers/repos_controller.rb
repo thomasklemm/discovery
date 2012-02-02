@@ -38,24 +38,9 @@ class ReposController < ApplicationController
     end
   end
 
-  # GET /repos/new
-  # GET /repos/new.json
-  def new
-    @repo = Repo.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @repo }
-    end
-  end
-
-  # GET /repos/1/edit
-  def edit
-    @repo = Repo.find(params[:id])
-  end
-
   # POST /repos
   # POST /repos.json
+  # ADD A NEW REPOSITORY VIA BOOKMARKLET OR FORM FIELDS
   def create
     # Create an empty repo in memory
     repo = Repo.new
@@ -107,6 +92,25 @@ class ReposController < ApplicationController
       end
     end
   end
+  
+=begin
+  # UNUSED METHODS GENERATED VIA SCAFFOLDING
+  
+  # GET /repos/new
+  # GET /repos/new.json
+  def new
+    @repo = Repo.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @repo }
+    end
+  end
+
+  # GET /repos/1/edit
+  def edit
+    @repo = Repo.find(params[:id])
+  end
 
   # PUT /repos/1
   # PUT /repos/1.json
@@ -135,4 +139,6 @@ class ReposController < ApplicationController
       format.json { head :ok }
     end
   end
+=end
+
 end
