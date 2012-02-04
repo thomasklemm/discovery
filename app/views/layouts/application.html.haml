@@ -6,11 +6,15 @@
 	-# = stylesheet_link_tag    "application"
 	= javascript_include_tag "application"
 	
-	-# Whats nescessary to serve the less css stylesheets
-	%link(rel="stylesheet/less" href="/stylesheets/less/bootstrap.less" type="text/css")
-	%link(rel="stylesheet/less" href="/stylesheets/less/foundation.less" type="text/css")
-	%link(rel="stylesheet/less" href="/stylesheets/less/discovery.less" type="text/css")
-	%script(src="http://lesscss.googlecode.com/files/less-1.2.1.min.js" type="text/javascript")
+	- if Rails.env.development?
+		-# Whats nescessary to serve the less css stylesheets
+		%link(rel="stylesheet/less" href="/stylesheets/less/bootstrap.less" type="text/css")
+		%link(rel="stylesheet/less" href="/stylesheets/less/foundation.less" type="text/css")
+		%link(rel="stylesheet/less" href="/stylesheets/less/discovery.less" type="text/css")
+		%script(src="http://lesscss.googlecode.com/files/less-1.2.1.min.js" type="text/javascript")
+		
+	- if Rails.env.production?
+		= stylesheet_link_tag "application"
 
 	= csrf_meta_tags
 
@@ -49,5 +53,5 @@
 		.row
 			.twelve.columns
 				= yield
-
+- if Rails.env.development?
 	%script document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
