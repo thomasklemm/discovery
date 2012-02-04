@@ -15,7 +15,7 @@
 		- @repos.each do |repo|
 			%li.repo(class="#{ cycle("odd", "even") }")
 	
-				%a.show(href="/repos/#{ encdot(repo.ident) }")
+				%a.show(href="/repos/#{ repo.ident }")
 					.ident
 						%span.owner= 			repo.owner
 						\ / 
