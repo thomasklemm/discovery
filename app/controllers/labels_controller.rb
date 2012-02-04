@@ -60,16 +60,57 @@ class LabelsController < ApplicationController
     end
   end 
   
+  # POST /do/addlabel
+  def addlabel
+    repo = Repo.find(params[:repo_id])
+    label = params[:label].downcase.strip
+    action = params[:do]
+    
+    repo.label_list << label
+    
+    if action == "removed"
+      repo.label_list.delete(label)
+    end
+    
+    repo.save
+    
+    Label.update_labels
+        
+    respond_to do |format|
+      format.html { redirect_to repo, notice: "Label '#{label}' successfully #{action}." }
+    end
+  end
+  
   # GET /labels/1
   # GET /labels/1.json
   def show
-    @label = Label.find(params[:id])
+    @label = Label.find_by_id(params[:id])
+    if @label.nil?
+      @label = Label.find_by_name(params[:id])
+    end
 
+    @repos = Repo.tagged_with(@label.name, on: :labels).order("watchers DESC")
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @label }
     end
   end
+
+  # ADD A DESCRIPTION TO A LABEL
+  # POST 'do/addlabeldesc'
+  def addlabeldesc
+    label = Label.find(params[:label][:id])
+    label.description = params[:label][:description].strip
+    label.save
+    
+    respond_to do |format|
+      format.html { redirect_to label, notice: "The description for this label has been successfully updated." }
+    end
+    
+  end
+
+
 
   # GET /labels/new
   # GET /labels/new.json

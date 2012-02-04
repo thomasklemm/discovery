@@ -2,13 +2,21 @@
 
 - @repos.each do |repo|
 	.repo
-		%a(href="#{ repo.html_url }")
-			.ident
-				%span.owner= 			repo.owner
-				\ / 
-				%span.name= 			repo.name
+		- if repo.ident.include? "."
+			%a.show(href="/repos/#{ repo.id }")
+				.ident
+					%span.owner= 			repo.owner
+					\ / 
+					%span.name= 			repo.name
+		- else
+			%a.show(href="/repos/#{ repo.ident }")
+				.ident
+					%span.owner= 			repo.owner
+					\ / 
+					%span.name= 			repo.name
 		.description= 		repo.description
-		.community_text= 	truncate(repo.community_text, length: 140)
+		-if repo.community_text
+			.community_text= 	truncate(repo.community_text, length: 140)
 		.stats
 			%span.acitivity
 				.activity_wheel(class="#{activity_wheel(repo.last_updated)}")

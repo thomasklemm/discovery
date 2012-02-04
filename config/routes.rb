@@ -10,6 +10,7 @@ Discovery::Application.routes.draw do
   get 'do/addrepo' => 'repos#create'
   post 'do/comtext' => 'repos#comtext'  
   post 'do/addlabel' => 'labels#addlabel'
+  post 'do/addlabeldesc' => 'labels#addlabeldesc'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

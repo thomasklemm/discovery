@@ -1,18 +1,24 @@
-%p#notice= notice
+.label-header
+	.name= @label.name
+	-# Description
+	- if params[:edit]
+		%form(action="/do/addlabeldesc" method="post")
+			%input(type="hidden" name="label[id]" value="#{ @label.id }")
+			%textarea(cols="50" rows="3" name="label[description]") #{ @label.description }
+			%input(type="submit" value="Submit changes")
+	- elsif @label.description.nil?  # New label, had no description yet
+		%a.p(href="?edit=true") Add a description for this label
+	- elsif @label.description.empty? # Existing label, a description has been added once but has been completely removed
+		%a.p(href="?edit=true") Add a description for this label	
+	- else
+		.description.p= 	@label.description
+		%a.p(href="?edit=true") Edit description
 
-%p
-  %b Name:
-  = @label.name
-%p
-  %b Repo count:
-  = @label.repo_count
-%p
-  %b Watcher count:
-  = @label.watcher_count
-%p
-  %b Description:
-  = @label.description
+	.repo_count= 			@label.repo_count
+	.watcher_count= 		@label.watcher_count
 
-= link_to 'Edit', edit_label_path(@label)
-\|
+%a.p(href="?edit=true") Edit description
+
+= render(partial: "shared/repo", collection: @repos)
+
 = link_to 'Back', labels_path

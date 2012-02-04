@@ -1,25 +1,42 @@
-%h1 Listing labels
+#labels
 
-%table
-  %tr
-    %th Name
-    %th Repo count
-    %th Watcher count
-    %th Description
-    %th
-    %th
-    %th
+	-# List.js searching and sorting
+	%input(class="search")
+	%span(class="sort" data-sort="name") Name
+	%span(class="sort" data-sort="repo_count") Repo Count
+	%span(class="sort" data-sort="watcher_count") Watcher Count
+	
 
-  - @labels.each do |label|
-    %tr
-      %td= label.name
-      %td= label.repo_count
-      %td= label.watcher_count
-      %td= label.description
-      %td= link_to 'Show', label
-      %td= link_to 'Edit', edit_label_path(label)
-      %td= link_to 'Destroy', label, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Label', new_label_path
+	%ul.list
+		- @labels.each do |label|
+			%li.label
+				- unless label.name.include? "."
+					%a(href="/labels/#{ label.name }")
+						.name.h5.bold= 				label.name
+				- else
+					%a(href="/labels/#{ label.id }")
+						.name.h5.bold= 				label.name
+				- if params[:edit]
+					%form.description_edit(action="/do/addlabeldesc" method="post")
+						%input(type="hidden" name="label[id]" value="#{ label.id }")
+						%textarea(cols="50" rows="3" name="label[description]") #{ label.description }
+						%input(type="submit" value="Submit changes")
+				- elsif label.description.nil?  # New label, had no description yet
+					%a(href="?edit=true") Add a description for this label
+				- elsif label.description.empty? # Existing label, a description has been added once but has been completely removed
+					%a(href="?edit=true") Add a description for this label	
+				- else	
+					.description.p= 		truncate(label.description, length: 140)
+		
+				.top_repos= 		label.top_repos
+		
+				.repo_count= 		label.repo_count
+				.watcher_count= 	label.watcher_count
+			
+	-# Initiate List.js Index			
+	%script
+		var options = {valueNames: ["name", "description", "top_repos", "repo_count", "watcher_count"]};
+	
+		var LabelList = new List('labels', options);
+		
+		

@@ -14,8 +14,14 @@
 			%input(type="hidden" name="repo[id]" value="#{ repo.id }")
 			%textarea(cols="10" rows="6" name="repo[community_text]") #{repo.community_text}
 			%input(type="submit" value="Submit changes")
+	- elsif repo.community_text.nil?  # New repo, had no ct yet
+		%a.p(href="?edit=true") Add a community text
+	- elsif repo.community_text.empty? # Existing repo, a ct has been added once but has been completely removed
+		%a.p(href="?edit=true") Add a community text		
 	- else
-		.community_text= 	repo.community_text
+		.community_text.p= 	repo.community_text
+		
+	.labels= 	repo.label_list.join(" ")
 		
 	.stats
 		%span.acitivity
@@ -27,9 +33,19 @@
 	%a.html_url(href="#{ repo.html_url }") Github
 	|
 	%a.homepage(href="#{ repo.homepage }")	Homepage
+
+
+%form.nice(action="/do/addlabel" method="post")
+	%input(type="hidden" name="repo_id" value="#{ repo.id }")
+	%input.input-text(type="text" name="label" value="" placeholder="Add a new label" autofocus="true" autocomplete="off" required)
+	%input(type="radio" name="do" value="added" checked) Add
+	%input(type="radio" name="do" value="removed") Remove
+	%input(type="submit" value="Do it!")
 		
-%a(href="?edit=true") Edit community text
+%a.p(href="?edit=true") Add or Edit community text
 
 %br		
+
+= render(partial: "shared/repo", collection: @alternatives)
 
 = link_to 'Back', repos_path

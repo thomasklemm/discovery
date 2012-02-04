@@ -17,7 +17,9 @@ class ReposController < ApplicationController
     if params[:id]
       @repo = Repo.find_by_id(params[:id])
       ident = "with ID " + params[:id].to_s
-    elsif (params[:owner] and params[:name])
+    end
+    
+    if (params[:owner] and params[:name])
       @repo = Repo.find_by_owner_and_name(params[:owner].strip, params[:name].strip)
       ident = params[:owner].strip + "/" + params[:name].strip
     end
@@ -25,7 +27,7 @@ class ReposController < ApplicationController
     unless @repo.nil?
       @alternatives = @repo.find_related_labels
     end
-
+    
     respond_to do |format|
       unless @repo.nil? 
         # Repo and Alternatives found
@@ -33,7 +35,7 @@ class ReposController < ApplicationController
         format.json { render json: @repo }
       else
         # Repo could not be found
-        redirect_to :root, notice: "Repo '#{ident}' could not be found."
+        redirect_to repos_url, notice: "Repo '#{ident}' could not be found."
       end
     end
   end
