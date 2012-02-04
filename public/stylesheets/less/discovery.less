@@ -21,25 +21,34 @@
 // Repo Index View
 // Listing all repos 
 .repo {
-	.h6; margin: 10px;
+	.h6; margin: 0px;
 	.bordered;
-	.drop-shadow;
-	padding: 10px;
-	
+	width: 450px;
+	padding: 8px;
+	font-size: 15px;
 	.ident {
-		.h5; 
-		.bold;
+		.bold; .mb;
 		.owner {}
-		.name {}
+		.name {font-size: 20px;}
 	}
-	.description {.p;}	
-	.community_text {}
+	.description {.mb;}	
+	.community_text {.mb;}
+	
+	.labels {.mb;}
+	
+	.stats {font-size: 13px;}	
 	.watchers {}
 	.forks {}
 	
-	
+	.links {font-size: 13px; margin-bottom: 4px;}	
+			
 	
 }
+
+.repo.odd 	{background: #eee;}
+.repo.even 	{background: #fff;}
+// Mixin margin-bottom .mb;
+.mb {margin-bottom: 10px;}
 
 // Activity Wheel
 
