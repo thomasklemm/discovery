@@ -1,32 +1,53 @@
 .h3 Repos
 
-- @repos.each do |repo|
-	.repo(class="#{ cycle("odd", "even") }")
+
+
+#repos-list
+
+	%input.search(type="search" autofocus="true" autocomplete="off" size="25")
+	%span.sort(data-sort="name") Name
+	%span.sort(data-sort="owner") Owner
+	|
+	%span.sort(data-sort="watchers") Watchers
+	%span.sort(data-sort="forks") Forks
+
+	%ul.list
+		- @repos.each do |repo|
+			%li.repo(class="#{ cycle("odd", "even") }")
 	
-		%a.show(href="/repos/#{ doturl(repo.ident) }")
-			.ident
-				%span.owner= 			repo.owner
-				\ / 
-				%span.name= 			repo.name
+				%a.show(href="/repos/#{ encdot(repo.ident) }")
+					.ident
+						%span.owner= 			repo.owner
+						\ / 
+						%span.name= 			repo.name
 		
-		.description= 		repo.description
+				.description= 		repo.description
 		
-		.community_text= 	truncate(repo.community_text, length: 140)
+				.community_text= 	truncate(repo.community_text, length: 140)
 		
-		.labels 	Labels: #{ sort_by_popularity(repo.label_list) }
+				.labels 	Labels: #{ sort_by_popularity(repo.label_list) }
 		
-		.stats
-			%span.acitivity
-				.activity_wheel(class="#{activity_wheel(repo.last_updated)}")
-			|
-			%span.watchers 			W: #{ repo.watchers }
-			|
-			%span.forks 				F: #{ repo.forks }
+				.stats
+					%span.acitivity
+						.activity_wheel(class="#{activity_wheel(repo.last_updated)}")
+					|
+					%span.watchers 			W: #{ repo.watchers }
+					|
+					%span.forks 				F: #{ repo.forks }
 		
-		.links
-			%a.html_url(href="#{ repo.html_url }") Github
-			|
-			%a.homepage(href="#{ repo.homepage }")	Homepage
+				.links
+					%a.html_url(href="#{ repo.html_url }") Github
+					|
+					%a.homepage(href="#{ repo.homepage }")	Homepage
 			
+	%ul.paging
+	
+	.p Test
+	
+%script
+	var options = { valueNames: ['name', 'owner', 'description', 'community_text', 'labels', 'watchers', 'forks', 'html_url', 'homepage'], page: 2, plugins: [['paging'a]] };
+	
+	var ReposList = new List('repos-list', options);
+
 
 = render(partial: "shared/add_repo")

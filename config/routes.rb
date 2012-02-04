@@ -1,10 +1,9 @@
 Discovery::Application.routes.draw do
   
-  resources :repos
-  get 'repos/:owner/:name' => 'repos#show' 
+  resources :repos, :id => /[^\/]*/
+  get 'repos/:owner/:name' => 'repos#show' , :name => /[^\/]*/
   
-  
-  resources :labels
+  resources :labels, :id => /[^\/]*/
   
   # Do Actions
   
@@ -12,6 +11,9 @@ Discovery::Application.routes.draw do
   post 'do/comtext' => 'repos#comtext'  
   post 'do/addlabel' => 'labels#addlabel'
   post 'do/addlabeldesc' => 'labels#addlabeldesc'
+
+  # (T) Routing parameters with .'s in them in Rails 3: http://coding-journal.com/rails-3-routing-parameters-with-dots/
+  # (T) resources :repos, :id => /[^\/]*/
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

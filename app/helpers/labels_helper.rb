@@ -16,7 +16,7 @@ module LabelsHelper
     
     a = Array.new
     hs.each do |k,v|
-      a << "<a href='/labels/#{doturl(k)}'>#{k}</a>"
+      a << "<a href='/labels/#{encdot(k)}'>#{k}</a>"
     end
     
     return a.join(", ").html_safe
