@@ -2,10 +2,16 @@
 	
 	.h6 Add a new repo
 	
+	.text1 1) Use this bookmarklet when browsing Github: Drag it to your bookmarks bar to install, click to publish the repo you look at to discovery!
+	.bookmarklet
+		%a.small.blue.radius.button(href="javascript:open('http://repofinder.herokuapp.com/do/addrepo/?url=' + document.location)") Post to discovery!
+	
+	
+	.text2 2) Submit it right here:
 	%form.nice(accept-charset="UTF-8" action="/repos" method="post")
 		%input.input_text(type="text" size="30" name="repo[owner]" placeholder="Owner's Github Name" autocomplete="off")
 		\ /
 		%input.input_text(type="text" size="30" name="repo[name]" placeholder="Repo Name" autocomplete="off")
-		
+
 		%input(type="submit" value="Add repo")
 	

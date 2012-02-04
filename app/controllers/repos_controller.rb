@@ -93,6 +93,17 @@ class ReposController < ApplicationController
     end
   end
   
+  # Add or modify a community text ín the repos show view
+  def comtext
+    repo = Repo.find(params[:repo][:id])  
+    repo.community_text = params[:repo][:community_text]
+    repo.save
+    
+    respond_to do |format|
+      format.html { redirect_to repo, notice: "Community Text has been updated. Thanks!"}
+    end
+  end
+  
 =begin
   # UNUSED METHODS GENERATED VIA SCAFFOLDING
   

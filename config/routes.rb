@@ -1,13 +1,15 @@
 Discovery::Application.routes.draw do
   
-  resources :labels
-
   resources :repos
   get 'repos/:owner/:name' => 'repos#show' 
-    
-  get 'addrepo' => 'repos#create'
   
+  resources :labels
   
+  # Do Actions
+  
+  get 'do/addrepo' => 'repos#create'
+  post 'do/comtext' => 'repos#comtext'  
+  post 'do/addlabel' => 'labels#addlabel'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -59,7 +61,7 @@ Discovery::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root to: 'labels#index'
+  root to: 'repos#index'
 
   # See how all your routes lay out with "rake routes"
 

@@ -2,17 +2,29 @@
 
 - @repos.each do |repo|
 	.repo
-		.ident
-			.owner= 			repo.owner
-			.name= 			repo.name
-			.description= 	repo.description
-			.community_text= repo.community_text
-			.watchers= 		repo.watchers
-			.forks= 			repo.forks
-			%a.html_url(href="#{ repo.html_url }")
-			%a.homepage(href="#{ repo.homepage }")
-			.acitivity
-				.last_updated= 	repo.last_updated
-				.activity_wheel
+		%a(href="#{ repo.html_url }")
+			.ident
+				%span.owner= 			repo.owner
+				\ / 
+				%span.name= 			repo.name
+		.description= 		repo.description
+		.community_text= 	truncate(repo.community_text, length: 140)
+		.stats
+			%span.acitivity
+				.activity_wheel(class="#{activity_wheel(repo.last_updated)}")
+			|
+			%span.watchers 			W: #{ repo.watchers }
+			|
+			%span.forks 				F: #{ repo.forks }
+		%a.html_url(href="#{ repo.html_url }") Github
+		|
+		%a.homepage(href="#{ repo.homepage }")	Homepage
+		|
+		-# Nicer URL than just ID for repos that have no "." in identifier (those with "." would otherwise not be routed correctly)
+		- if repo.ident.include? "."
+			%a.show(href="/repos/#{ repo.id }") Show
+		- else
+			%a.show(href="/repos/#{ repo.ident }") Show
+
 
 = render(partial: "shared/add_repo")

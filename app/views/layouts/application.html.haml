@@ -7,9 +7,9 @@
 	= javascript_include_tag "application"
 	
 	-# Whats nescessary to serve the less css stylesheets
-	%link(rel="stylesheet/less" href="/stylesheets/less/bootstrap.less")
-	%link(rel="stylesheet/less" href="/stylesheets/less/foundation.less")
-	%link(rel="stylesheet/less" href="/stylesheets/less/discovery.less")
+	%link(rel="stylesheet/less" href="/stylesheets/less/bootstrap.less" type="text/css")
+	%link(rel="stylesheet/less" href="/stylesheets/less/foundation.less" type="text/css")
+	%link(rel="stylesheet/less" href="/stylesheets/less/discovery.less" type="text/css")
 	%script(src="http://lesscss.googlecode.com/files/less-1.2.1.min.js" type="text/javascript")
 
 	= csrf_meta_tags
@@ -31,9 +31,9 @@
 					
 						-# Maybe there is an easier way to build a navigation
 						- if controller.controller_name == "labels"
-							%a.navitem.active(href="/") Labels
+							%a.navitem.active(href="/labels") Labels
 						- else
-							%a.navitem(href="/")	Labels
+							%a.navitem(href="/labels")	Labels
 						
 						- if controller.controller_name == "repos"
 							%a.navitem.active(href="/repos") Repos
